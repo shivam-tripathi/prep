@@ -22,11 +22,10 @@ public:
 		if (arr.size() < 3)
 			return;
 
-		one_size = arr[0];
-		two_size_first = min(arr[0], arr[1]);
-		two_size_mid = max(arr[0], arr[1]);
+		one_size = two_size_first = arr[0];
+		two_size_mid = INT_MAX;
 
-		for(int i=2; i<arr.size(); i++) {
+		for(int i=1; i<arr.size(); i++) {
 			if(arr[i] > two_size_mid) {
 				end_index = i;
 				return;
