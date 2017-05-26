@@ -39,6 +39,20 @@ int bs_lower_bound(vector<pii> &a, int n, int x) {
 // 	if (a[mid] )
 // }
 
+int lower_bound_bs(vector<pii> a, int x) {
+	int low = 0, high = a.size()-1;
+	int mid;
+	while(high-low>1) {
+		mid = low + (high - low)/2;
+		if (a[mid].first >= x)
+			high = mid;
+		else 
+			low = mid;
+	}
+	mid = low + (high - low)/2;
+	return low;
+}
+
 void print (vector <pii> &a, string msg) {
 	cout << msg << endl;
 	for (int i=0; i<a.size(); i++) {
@@ -181,14 +195,18 @@ int main(int argc, char const *argv[]) {
 	// cout << "Maxval :: " << maxval << endl;
 
 
+	cout << "darr size " << darr.size() << endl;
+
 	for(int i=darr.size()-1; i>=0; i--) {
 		int cost = darr[i].first;
 		int index = bs_lower_bound(darr, darr.size(), d-cost);
 
+		cout << i << " " << index << endl;
 
 		if(0 > index || index >= diamond.size())
 			continue;
 
+		cout << "i = " << i << " -> " << cost << " | index = " << index << " " << darr[index].first << endl;
 		
 		if (cost <= darr[index].first) 
 			break;
@@ -211,8 +229,10 @@ int main(int argc, char const *argv[]) {
 		if(0 > index || index >= carr.size())
 			continue;
 
+		
 		if (cost <= carr[index].first) 
 			break;
+
 
 		if (cost + carr[index].first <= c) {
 			// cout << darr[i].first << " " << darr[i].second << " " << index << " : " << diamond[index].first << " " << diamond[index].second << endl;
